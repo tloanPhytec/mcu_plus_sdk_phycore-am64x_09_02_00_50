@@ -37,7 +37,8 @@ const section4        = section.addInstance();
 bootloader1.$name     = "CONFIG_BOOTLOADER0";
 bootloader1.bootMedia = "MEM";
 
-ddr1.$name = "CONFIG_DDR0";
+ddr1.$name                    = "CONFIG_DDR0";
+ddr1.ddrConfigIncludeFileName = "drivers/ddr/v0/soc/am64x_am243x/board_ddrReginit_phytec.h";
 
 debug_log.enableUartLog        = true;
 debug_log.enableCssLog         = false;
