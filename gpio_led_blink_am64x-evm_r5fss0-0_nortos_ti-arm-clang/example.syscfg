@@ -10,6 +10,7 @@
  */
 const gpio            = scripting.addModule("/drivers/gpio/gpio", {}, false);
 const gpio1           = gpio.addInstance();
+const gpio2           = gpio.addInstance();
 const debug_log       = scripting.addModule("/kernel/dpl/debug_log");
 const mpu_armv7       = scripting.addModule("/kernel/dpl/mpu_armv7", {}, false);
 const mpu_armv71      = mpu_armv7.addInstance();
@@ -44,6 +45,10 @@ gpio1.$name                = "GPIO_LED";
 gpio1.pinDir               = "OUTPUT";
 gpio1.GPIO.$assign         = "GPIO0";
 gpio1.GPIO.gpioPin.$assign = "GPMC0_AD0";
+
+gpio2.$name                = "CONFIG_GPIO0";
+gpio2.pinDir               = "OUTPUT";
+gpio2.GPIO.gpioPin.$assign = "GPMC0_AD1";
 
 debug_log.enableUartLog        = true;
 debug_log.uartLog.$name        = "CONFIG_UART_CONSOLE";
@@ -255,5 +260,6 @@ section11.output_section[0].alignment = 0;
  * version of the tool will not impact the pinmux you originally saw.  These lines can be completely deleted in order to
  * re-solve from scratch.
  */
+gpio2.GPIO.$suggestSolution                 = "GPIO0";
 debug_log.uartLog.UART.RXD.$suggestSolution = "UART0_RXD";
 debug_log.uartLog.UART.TXD.$suggestSolution = "UART0_TXD";

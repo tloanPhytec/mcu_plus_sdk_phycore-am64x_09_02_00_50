@@ -48,6 +48,7 @@ void gpio_led_blink_main(void *args)
 {
     uint32_t    loopcnt = 5, delaySec = 1;
     uint32_t    gpioBaseAddr, pinNum;
+    uint32_t    gpioBaseAddr1, pinNum1;
 
     /* Open drivers to open the UART driver for console */
     Drivers_open();
@@ -60,6 +61,12 @@ void gpio_led_blink_main(void *args)
     gpioBaseAddr = (uint32_t) AddrTranslateP_getLocalAddr(GPIO_LED_BASE_ADDR);
     pinNum       = GPIO_LED_PIN;
     GPIO_setDirMode(gpioBaseAddr, pinNum, GPIO_LED_DIR);
+
+    gpioBaseAddr1 = (uint32_t) AddrTranslateP_getLocalAddr(CONFIG_GPIO0_BASE_ADDR);
+    pinNum1       = CONFIG_GPIO0_PIN;
+    GPIO_setDirMode(gpioBaseAddr1, pinNum1, CONFIG_GPIO0_DIR);
+    GPIO_pinWriteLow(gpioBaseAddr1, pinNum1);
+
     while(loopcnt > 0)
     {
         GPIO_pinWriteHigh(gpioBaseAddr, pinNum);
