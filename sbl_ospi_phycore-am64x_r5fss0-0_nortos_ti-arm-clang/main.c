@@ -217,7 +217,7 @@ int main(void)
             Bootloader_profileUpdateAppimageSize(Bootloader_getMulticoreImageSize(bootHandle));
             Bootloader_profileUpdateMediaAndClk(BOOTLOADER_MEDIA_FLASH, OSPI_getInputClk(gOspiHandle[CONFIG_OSPI0]));
 
-            #if 1
+            #if 0
             if( status == SystemP_SUCCESS)
             {
                 /* enable Phy and Phy pipeline for XIP execution */
