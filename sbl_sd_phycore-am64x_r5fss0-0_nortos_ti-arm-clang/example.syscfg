@@ -1,8 +1,8 @@
 /**
  * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
  * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
- * @cliArgs --device "AM64x" --package "ALV" --part "Default" --context "r5fss0-0" --product "MCU_PLUS_SDK@07.03.01"
- * @versions {"tool":"1.17.0+3128"}
+ * @cliArgs --device "AM64x" --package "ALV" --part "Default" --context "r5fss0-0" --product "MCU_PLUS_SDK_AM64x@09.02.00"
+ * @versions {"tool":"1.20.0+3587"}
  */
 
 /**
@@ -40,18 +40,23 @@ const section5        = section.addInstance();
 bootloader1.$name     = "CONFIG_BOOTLOADER_MEM";
 bootloader1.bootMedia = "MEM";
 
-ddr1.$name = "CONFIG_DDR0";
+ddr1.$name                    = "CONFIG_DDR0";
+ddr1.ddrConfigIncludeFileName = "drivers/ddr/v0/soc/am64x_am243x/board_ddrReginit_phytec.h";
 
-freertos_fat1.$name                     = "CONFIG_FREERTOS_FAT0";
-freertos_fat1.peripheralDriver.$name    = "CONFIG_MMCSD0";
-freertos_fat1.peripheralDriver.cardType = "SD";
-freertos_fat1.peripheralDriver.phyType  = "SW_PHY";
+freertos_fat1.$name                    = "CONFIG_FREERTOS_FAT0";
+freertos_fat1.peripheralDriver.$name   = "CONFIG_MMCSD0";
+freertos_fat1.peripheralDriver.phyType = "SW_PHY";
 
 debug_log.enableCssLog         = false;
 debug_log.enableUartLog        = true;
 debug_log.enableLogZoneWarning = false;
 debug_log.uartLog.$name        = "CONFIG_UART0";
 debug_log.uartLog.intrEnable   = "DISABLE";
+
+const uart_v0_template  = scripting.addModule("/drivers/uart/v0/uart_v0_template", {}, false);
+const uart_v0_template1 = uart_v0_template.addInstance({}, false);
+uart_v0_template1.$name = "drivers_uart_v0_uart_v0_template0";
+debug_log.uartLog.child = uart_v0_template1;
 
 mpu_armv71.$name             = "CONFIG_MPU_REGION0";
 mpu_armv71.size              = 31;
